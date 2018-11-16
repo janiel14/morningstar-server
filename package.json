@@ -1,0 +1,21 @@
+{
+  "name": "morningstar-server",
+  "version": "1.0.0",
+  "description": "Project for rest api for receiver metrics data.",
+  "main": "server.js",
+  "repository": "https://github.com/janiel14/morningstar-server.git",
+  "author": "Janiel Oliveira <janielbelmont@gmail.com>",
+  "license": "MIT ",
+  "private": false,
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "consign": "^0.1.6",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "express-validator": "^5.3.0",
+    "helmet": "^3.15.0",
+    "method-override": "^3.0.0",
+    "mongoose": "^5.3.12",
+    "winston": "^3.1.0"
+  }
+}
