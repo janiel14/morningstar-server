@@ -1,6 +1,6 @@
 const Mongoose = require('mongoose');
 module.exports = function(app) {
-    return app.mongoose.model('serverMetrics', new Mongoose.Schema({
+    return app.mongodb.model('serverMetrics', new Mongoose.Schema({
         hostname: 'String',
         date: 'Date',
         cpu: 'Number',
