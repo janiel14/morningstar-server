@@ -75,7 +75,7 @@ module.exports = function(app) {
      * insertOrUpdate
      * @param {Object} req
      * @param {Object} res
-     * @route /api/accounts/users
+     * @route /api/accountsusers
      * @method POST
      */
     _self.insertOrUpdateUser = async (req, res) => {
@@ -150,6 +150,21 @@ module.exports = function(app) {
                 messae: "Internal server error",
                 data: error
             });
+        }
+    }
+
+    /**
+     * delete
+     * @param {Object} req
+     * @param {Object} res
+     * @route /api/accounts/:id
+     * @method POST
+     */
+    _self.deleteAccount = async (req, res) => {
+        try {
+            
+        } catch (error) {
+            
         }
     }
 
