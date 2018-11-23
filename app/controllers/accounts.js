@@ -94,7 +94,47 @@ module.exports = function(app) {
                     _id: req.header('star')
                 });
                 if (account) {
-                    
+                    if (req.body._id) {
+                        account.users.find((item, index) => {
+                            if (item._id === req.body._id) {
+                                account.users[index] = req.body;
+                            }
+                        });
+                        const updated = await Accounts.updateOne({
+                            _id: account._id
+                        }, account);
+                        if (updated) {
+                            res.status(200).json({
+                                status: 200,
+                                message: 'User updated',
+                                data: updated
+                            });
+                        } else {
+                            res.status(500).json({
+                                status: 500,
+                                message: 'User not updated',
+                                data: updated
+                            });
+                        }
+                    } else {
+                        account.users.push(req.body);
+                        const created = await Accounts.updateOne({
+                            _id: account._id
+                        }, account);
+                        if (created) {
+                            res.status(200).json({
+                                status: 200,
+                                message: 'User created',
+                                data: created
+                            });
+                        } else {
+                            res.status(500).json({
+                                status: 500,
+                                message: 'User not created',
+                                data: created
+                            });
+                        }
+                    }
                 } else {
                     res.status(500).json({
                         status: 500,
