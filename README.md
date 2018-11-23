@@ -9,7 +9,7 @@ Metrics capture and server monitoring project. base project with server and clie
 - export NODE_MONGO_USER= (Default: morningstar)
 - export NODE_MONGO_PASS= (Default: dfhuw128ysg)
 - export NODE_MONGO_DBNAME= (Default: morningstar)
-- export NODE_MONGO_PORT= (Default: 27017s)
+- export NODE_MONGO_PORT= (Default: 27017)
 
 ### Requiments
 - NODE: latest

@@ -1,10 +1,10 @@
 module.exports = function(app) {
     const controller = app.controllers.servers;
     app.route('/api/servers')
-        .post(controller.insertOrUpdate);
+        .post(app.auth.authorizeUserID, controller.insertOrUpdate);
     app.route('/api/servers/:hostname')
         .delete(controller.delete)
-        .get(controller.getServer);
+        .get(app.auth.authorizeUserID, controller.getServer);
     app.route('/api/servers/:skip/:limit')
-        .get(controller.getServers);
+        .get(app.auth.authorizeUserID, controller.getServers);
 }

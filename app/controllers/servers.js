@@ -23,6 +23,17 @@ module.exports = function(app) {
                 const serverExists = await Servers.findOne({
                     hostname: req.body.hostname
                 });
+                /*
+                if (req.body.ips) {
+                    req.body.ips = JSON.parse(req.body.ips);
+                }
+                if (req.body.hds) {
+                    req.body.hds = JSON.parse(req.body.hds);
+                }
+                if (req.body.services) {
+                    req.body.services = JSON.parse(req.body.services);
+                }
+                */
                 if (serverExists) {
                     const updated = await Servers.updateOne({
                         hostname: req.body.hostname
@@ -61,7 +72,7 @@ module.exports = function(app) {
                 }
             }
         } catch (error) {
-            app.logger.log("error", "app - controllers - servers - insertOrUpdate: " + error);
+            app.logger.error("app - controllers - servers - insertOrUpdate: " + error);
             res.status(500).json({
                 status: 500,
                 messae: "Internal server error",
@@ -89,7 +100,7 @@ module.exports = function(app) {
                 total: 1
             });
         } catch (error) {
-            app.logger.log("error", "app - controllers - servers - getServer: " + error);
+            app.logger.error("app - controllers - servers - getServer: " + error);
             res.status(500).json({
                 status: 500,
                 messae: "Internal server error",
@@ -106,10 +117,7 @@ module.exports = function(app) {
      */
     _self.getServers = async (req, res) => {
         try {
-            const servers = Servers.find({
-                skip: req.params.pag,
-                limit: req.params.limit
-            });
+            const servers =  await Servers.find().skip(parseInt(req.params.skip)).limit(parseInt(req.params.limit));
             res.status(200).json({
                 status: 200,
                 message: "Servers finded",
@@ -117,7 +125,7 @@ module.exports = function(app) {
                 total: servers.length
             });
         } catch (error) {
-            app.logger.log("error", "app - controllers - servers - getServers: " + error);
+            app.logger.error("app - controllers - servers - getServers: " + error);
             res.status(500).json({
                 status: 500,
                 messae: "Internal server error",
@@ -135,7 +143,7 @@ module.exports = function(app) {
      */
     _self.delete = async (req, res) => {
         try {
-            const deleted = await Servers.destroy({
+            await Servers.destroy({
                 hostname: req.params.hostname
             });
             res.status(200).json({
@@ -143,7 +151,7 @@ module.exports = function(app) {
                 message: "Servers deleted"
             });
         } catch (error) {
-            app.logger.log("error", "app - controllers - servers - delete: " + error);
+            app.logger.error("app - controllers - servers - delete: " + error);
             res.status(500).json({
                 status: 500,
                 messae: "Internal server error",
